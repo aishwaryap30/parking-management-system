@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Parking Slots</title>
+</head>
+<body>
+
+<h2>Add Parking Slot</h2>
+
+<form action="/slots/add" method="post">
+    Slot Number: <input type="text" name="slotNumber"><br><br>
+
+    Slot Type:
+    <select name="slotType">
+        <option value="TWO_WHEELER">Two Wheeler</option>
+        <option value="FOUR_WHEELER">Four Wheeler</option>
+    </select><br><br>
+
+    <button type="submit">Add Slot</button>
+</form>
+
+<hr>
+
+<h2>All Slots</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Slot Number</th>
+        <th>Status</th>
+    </tr>
+
+    <tr th:each="slot : ${slots}">
+        <td th:text="${slot.slotId}"></td>
+        <td th:text="${slot.slotNumber}"></td>
+        <td th:text="${slot.status}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
