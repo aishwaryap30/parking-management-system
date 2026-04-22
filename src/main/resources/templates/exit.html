@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Exit</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        transition: 0.3s;
+        overflow-x: hidden;
+    }
+
+    /* THEMES */
+    body.dark {
+        background: radial-gradient(circle at 20% 20%, #1a1f3c, #0b0f1a);
+        color: white;
+    }
+
+    body.light {
+        background: radial-gradient(circle at 20% 20%, #ffffff, #dbeafe);
+        color: #0f172a;
+    }
+
+    /* GLOW */
+    .bg-glow {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: #7c3aed;
+        filter: blur(120px);
+        opacity: 0.2;
+        top: -100px;
+        left: -100px;
+        z-index: -1;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 80px;
+    }
+
+    .logo span {
+        font-size: 28px;
+        font-weight: 700;
+        background: linear-gradient(90deg, #7c3aed, #22d3ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .nav-buttons button {
+        margin-left: 15px;
+        padding: 12px 24px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .dark .nav-buttons button {
+        background: rgba(255,255,255,0.08);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .light .nav-buttons button {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .nav-buttons button:hover {
+        background: linear-gradient(90deg, #7c3aed, #22d3ee);
+        transform: scale(1.05);
+    }
+
+    /* CENTER */
+    .container {
+        height: calc(100vh - 90px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: -40px;
+    }
+
+    .header {
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    /* GLASS CARD */
+    .card {
+        width: 420px;
+        padding: 40px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* INPUT */
+    input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: none;
+        margin-top: 15px;
+        outline: none;
+        font-size: 15px;
+    }
+
+    /* BUTTONS */
+    .btn {
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 15px;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+    .btn-danger {
+        background: linear-gradient(90deg, #7c3aed, #22d3ee);
+        color: white;
+    }
+
+    .btn-danger:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-primary {
+        background: rgba(255,255,255,0.1);
+        color: white;
+        width: 200px;
+    }
+    .light .btn-primary {
+      background: #e2e8f0;
+      color: #0f172a;
+  }
+
+    .btn-primary:hover {
+        background: linear-gradient(90deg, #7c3aed, #22d3ee);
+         color: white;
+    }
+
+    /* MODAL */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* BILL (REAL LOOK) */
+    .ticket-box {
+        background: white;
+        color: black;
+        padding: 25px;
+        border-radius: 12px;
+        width: 320px;
+        text-align: center;
+        border: 2px dashed #000;
+        font-family: monospace;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .ticket-box h3 {
+        margin-bottom: 10px;
+    }
+
+    .divider {
+        border-top: 1px dashed black;
+        margin: 10px 0;
+    }
+
+    /* FIX BUTTON VISIBILITY */
+    .ticket-box .btn-primary {
+        background: #7c3aed;
+        color: white;
+    }
+
+    .ticket-box .btn-danger {
+        background: #ef4444;
+        color: white;
+    }
+    /* BACK BUTTON */
+  .back-btn {
+      margin-top: 20px;
+  }
+
+    /* ============================= */
+/* RESPONSIVENESS ONLY */
+/* ============================= */
+
+/* TABLET (<= 1024px) */
+@media (max-width: 1024px) {
+
+    .navbar {
+        padding: 0 40px;
+    }
+
+    .header {
+        font-size: 34px;
+    }
+
+    .card {
+        width: 380px;
+        padding: 35px;
+    }
+}
+
+/* MOBILE (<= 768px) */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        height: auto;
+        padding: 40px 20px;
+        margin-top: 0;
+    }
+
+    .header {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 360px;
+        padding: 25px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .back-btn {
+        width: 100%;
+    }
+
+    .ticket-box {
+        width: 90%;
+    }
+}
+
+/* SMALL MOBILE (<= 480px) */
+@media (max-width: 480px) {
+
+    .logo span {
+        font-size: 22px;
+    }
+
+    .header {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    input {
+        font-size: 13px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+}
+
+  </style>
+
+</head>
+
+<body class="dark">
+
+<div class="bg-glow"></div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <span>Smart Parking</span>
+  </div>
+
+  <div class="nav-buttons">
+    <a href="/"><button>Home</button></a>
+    <button onclick="toggleTheme()">🌙</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <div class="header">Vehicle Exit</div>
+
+  <div class="card">
+    <form action="/exit" method="post">
+      <input type="text" name="ticketNumber" placeholder="Enter Ticket Number" required>
+      <button class="btn btn-danger">Generate Bill</button>
+    </form>
+  </div>
+
+  <a href="/">
+    <button class="btn btn-primary back-btn">⬅ Back</button></a>
+
+</div>
+
+<!-- BILL MODAL -->
+<div class="modal" id="billModal" th:if="${bill}">
+  <div class="ticket-box">
+
+    <h3>🧾 Parking Bill</h3>
+
+    <div class="divider"></div>
+
+    <p><b>Ticket:</b> <span th:text="${bill.ticketNumber}"></span></p>
+    <p><b>Vehicle:</b> <span th:text="${bill.vehicleNumber}"></span></p>
+    <p><b>Entry:</b> <span th:text="${bill.entryTime}"></span></p>
+    <p><b>Exit:</b> <span th:text="${bill.exitTime}"></span></p>
+    <p><b>Amount:</b> ₹<span th:text="${bill.amount}"></span></p>
+
+    <div class="divider"></div>
+
+    <button onclick="window.print()" class="btn btn-primary">Print</button>
+    <button onclick="closeModal()" class="btn btn-danger">Close</button>
+
+  </div>
+</div>
+
+<script>
+  function toggleTheme() {
+      let body = document.body;
+
+      if (body.classList.contains("dark")) {
+          body.classList.remove("dark");
+          body.classList.add("light");
+          localStorage.setItem("theme", "light");
+      } else {
+          body.classList.remove("light");
+          body.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+      }
+  }
+
+  window.onload = function() {
+      let theme = localStorage.getItem("theme") || "dark";
+      document.body.classList.add(theme);
+
+      var modal = document.getElementById("billModal");
+      if(modal) modal.style.display = "flex";
+  }
+
+  function closeModal() {
+      document.getElementById("billModal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

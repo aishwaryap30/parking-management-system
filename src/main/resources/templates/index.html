@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Parking</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+     margin: 0;
+     font-family: 'Poppins', sans-serif;
+     transition: 0.3s;
+     overflow-x: hidden;
+ }
+
+ /* THEMES */
+ body.dark {
+     background: radial-gradient(circle at 20% 20%, #1a1f3c, #0b0f1a);
+     color: white;
+ }
+
+ body.light {
+     background: radial-gradient(circle at 20% 20%, #ffffff, #dbeafe);
+     color: #0f172a;
+ }
+
+ /* GLOW */
+ .bg-glow {
+     position: fixed;
+     width: 500px;
+     height: 500px;
+     background: #7c3aed;
+     filter: blur(120px);
+     opacity: 0.2;
+     top: -100px;
+     left: -100px;
+     z-index: -1;
+ }
+
+ /* NAVBAR */
+ .navbar {
+     height: 90px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 80px;
+ }
+
+ /* LOGO */
+ .logo {
+     font-size: 28px;
+     font-weight: 700;
+     display: flex;
+     gap: 10px;
+ }
+
+ .logo span {
+     background: linear-gradient(90deg, #7c3aed, #22d3ee);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+ }
+
+ /* NAV BUTTONS (FIXED VISIBILITY) */
+ .nav-buttons button {
+     margin-left: 15px;
+     padding: 12px 24px;
+     border-radius: 10px;
+     border: none;
+     cursor: pointer;
+     font-weight: 600;
+     font-size: 15px;
+     transition: 0.3s;
+ }
+
+ /* DARK MODE FIX */
+ .dark .nav-buttons button {
+     background: rgba(255,255,255,0.08);
+     color: white;
+     border: 1px solid rgba(255,255,255,0.2);
+ }
+
+ /* LIGHT MODE */
+ .light .nav-buttons button {
+     background: #e2e8f0;
+     color: #0f172a;
+ }
+
+ /* HOVER */
+ .nav-buttons button:hover {
+     background: linear-gradient(90deg, #7c3aed, #22d3ee);
+     color: white;
+     transform: translateY(-2px) scale(1.05);
+ }
+
+ /* HERO FIX (MOVE UP + BETTER ALIGN) */
+ .hero {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     height: calc(100vh - 90px);
+     padding: 0 80px;
+     margin-top: -40px; /* 🔥 pushes hero slightly up */
+ }
+
+ /* TEXT */
+ .hero-text {
+     width: 50%;
+ }
+
+ .hero-text h1 {
+     font-size: 56px;
+     margin-bottom: 20px;
+ }
+
+ .hero-text p {
+     font-size: 18px;
+     color: #94a3b8;
+ }
+
+ /* BUTTONS */
+ .hero-actions {
+     margin-top: 30px;
+ }
+
+ .btn-main {
+     padding: 14px 32px;
+     background: linear-gradient(90deg, #7c3aed, #22d3ee);
+     color: white;
+     border-radius: 10px;
+     border: none;
+     cursor: pointer;
+     font-size: 16px;
+ }
+
+ .btn-main:hover {
+     transform: scale(1.08);
+ }
+
+ .btn-secondary {
+     padding: 14px 32px;
+     border: 1px solid #7c3aed;
+     border-radius: 10px;
+     background: transparent;
+     color: #7c3aed;
+     cursor: pointer;
+     margin-left: 10px;
+ }
+
+ .btn-secondary:hover {
+     background: #7c3aed;
+     color: white;
+ }
+
+ /* HERO VISUAL FIX */
+ .hero-visual {
+     width: 40%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ /* IMAGE STYLING */
+ .hero-visual img {
+     width: 100%;
+     max-width: 450px;
+     height: 450px;
+     border-radius: 260px;
+     padding: 20px;
+     background: rgba(255,255,255,0.01);
+     backdrop-filter: blur(10px);
+
+     transition: 0.3s;
+ }
+
+ .hero-visual img:hover {
+     transform: scale(1.05) rotate(-1deg);
+ }
+
+ /* FOOTER IMPROVED */
+ .footer {
+     padding: 25px 80px;
+     display: flex;
+     justify-content: center;   /* 🔥 centers horizontally */
+     align-items: center;
+     border-top: 1px solid rgba(255,255,255,0.1);
+     font-size: 14px;
+     text-align: center;
+ }
+
+ /* FOOTER LINKS */
+ .footer-links span {
+     margin-right: 20px;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ .footer-links span:hover {
+     color: #22d3ee;
+     transform: translateY(-2px);
+ }
+
+        /* ============================= */
+/* RESPONSIVENESS ONLY */
+/* ============================= */
+
+/* TABLET (<= 1024px) */
+@media (max-width: 1024px) {
+
+    .navbar {
+        padding: 0 40px;
+    }
+
+    .hero {
+        padding: 0 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .hero-visual img {
+        max-width: 350px;
+        height: 350px;
+    }
+
+    .footer {
+        padding: 20px 40px;
+    }
+}
+
+/* MOBILE (<= 768px) */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 40px 20px;
+        margin-top: 0;
+    }
+
+    .hero-text {
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 34px;
+    }
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-secondary {
+        margin-left: 0;
+    }
+
+    .hero-visual {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .hero-visual img {
+        max-width: 280px;
+        height: 280px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* SMALL MOBILE (<= 480px) */
+@media (max-width: 480px) {
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+        width: 100%;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .hero-visual img {
+        max-width: 220px;
+        height: 220px;
+    }
+}
+
+   /* your existing CSS (DON'T CHANGE) */
+
+   ...
+
+   /* FOOTER */
+   .footer-links span {
+       margin-right: 20px;
+   }
+
+   /* 👇 ADD RESPONSIVE CSS HERE (ONLY THIS PART) */
+   @media (max-width: 1024px) {
+       ...
+   }
+
+   @media (max-width: 768px) {
+       ...
+   }
+
+   @media (max-width: 480px) {
+       ...
+   }
+    </style>
+</head>
+
+<body class="dark">
+
+<!-- 🌟 BACKGROUND GLOW -->
+<div class="bg-glow"></div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">
+        <span>Smart Parking</span>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="/entry"><button>Entry</button></a>
+        <a href="/exit"><button>Exit</button></a>
+        <button onclick="toggleTheme()">🌗</button>
+    </div>
+
+</div>
+
+<!-- HERO -->
+<div class="hero">
+
+    <div class="hero-text">
+        <h1>Manage Parking Smarter 🚀</h1>
+
+        <p>
+            Real-time slot tracking, seamless ticket generation,
+            and smart billing — built for modern systems.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/dashboard"><button class="btn-main">View Dashboard</button></a>
+        </div>
+    </div>
+
+
+    <div class="hero-visual">
+        <img th:src="@{/images/car.png}" alt="Car Image">
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div>© 2026 Smart Parking</div>
+
+</div>
+
+<script>
+    function toggleTheme() {
+        let body = document.body;
+
+        if (body.classList.contains("dark")) {
+            body.classList.remove("dark");
+            body.classList.add("light");
+            localStorage.setItem("theme", "light");
+        } else {
+            body.classList.remove("light");
+            body.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        }
+    }
+
+    window.onload = function() {
+        let theme = localStorage.getItem("theme") || "dark";
+        document.body.classList.add(theme);
+    };
+</script>
+
+</body>
+</html>

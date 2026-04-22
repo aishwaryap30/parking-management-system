@@ -1,100 +1,53 @@
 package com.project.parking_management.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tickets")
 public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketId;
+    private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String ticketCode;
+    private String ticketNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
-
-    @ManyToOne
-    @JoinColumn(name = "slot_id")
-    private ParkingSlot slot;
+    private String vehicleNumber;
 
     private LocalDateTime entryTime;
 
     private LocalDateTime exitTime;
 
-    @Enumerated(EnumType.STRING)
-    private TicketStatus status = TicketStatus.ACTIVE;
+    private String status; // ACTIVE / CLOSED
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    // 🔗 Many Tickets → One Slot
+    @ManyToOne
+    @JoinColumn(name = "slot_id")
+    private Slot slot;
+
+    // Constructors
+    public Ticket() {}
 
     // Getters & Setters
 
+    public Long getId() { return id; }
 
-    public Integer getTicketId() {
-        return ticketId;
-    }
+    public String getTicketNumber() { return ticketNumber; }
+    public void setTicketNumber(String ticketNumber) { this.ticketNumber = ticketNumber; }
 
-    public void setTicketId(Integer ticketId) {
-        this.ticketId = ticketId;
-    }
+    public String getVehicleNumber() { return vehicleNumber; }
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
 
-    public String getTicketCode() {
-        return ticketCode;
-    }
+    public LocalDateTime getEntryTime() { return entryTime; }
+    public void setEntryTime(LocalDateTime entryTime) { this.entryTime = entryTime; }
 
-    public void setTicketCode(String ticketCode) {
-        this.ticketCode = ticketCode;
-    }
+    public LocalDateTime getExitTime() { return exitTime; }
+    public void setExitTime(LocalDateTime exitTime) { this.exitTime = exitTime; }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public ParkingSlot getSlot() {
-        return slot;
-    }
-
-    public void setSlot(ParkingSlot slot) {
-        this.slot = slot;
-    }
-
-    public LocalDateTime getEntryTime() {
-        return entryTime;
-    }
-
-    public void setEntryTime(LocalDateTime entryTime) {
-        this.entryTime = entryTime;
-    }
-
-    public LocalDateTime getExitTime() {
-        return exitTime;
-    }
-
-    public void setExitTime(LocalDateTime exitTime) {
-        this.exitTime = exitTime;
-    }
-
-    public TicketStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TicketStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public Slot getSlot() { return slot; }
+    public void setSlot(Slot slot) { this.slot = slot; }
 }
