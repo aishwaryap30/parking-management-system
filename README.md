@@ -1,59 +1,65 @@
-# 🚗 Parking Management System
+📌 Project Overview
+The Smart Parking Management System is a full-stack web application built using Java 8, Spring Boot, and Thymeleaf.
+It simulates a real-world automated parking system that handles:
 
-## 📌 Project Overview
-This is a backend project built using Java 8 and Spring Boot.
-
-The goal of this project is to design and develop a system that manages parking operations such as vehicle entry, exit, and slot allocation.
-
-This project is being developed step-by-step to understand real-world backend development.
-
-
-## 🎯 Current Progress
-- ✅ Project setup completed using Spring Boot
-- ⏳ Working on: Vehicle Entry Module
+🚗 Vehicle Entry (Ticket Generation)
+🚙 Vehicle Exit (Billing System)
+🅿️ Real-time Slot Management Dashboard
 
 
-
-## 🛠 Tech Stack
-- Java 8
-- Spring Boot
-- Maven
-- MySQL (planned)
+The system is designed to demonstrate backend architecture, database handling, and UI integration in a real-time project environment.
+🎯 Key Features
+✔️ Vehicle entry with automatic ticket generation
+✔️ Vehicle exit with dynamic billing system
+✔️ Real-time parking slot tracking
+✔️ Free vs occupied slot visualization
+✔️ Theme switching (Dark / Light mode)
+✔️ Responsive UI (mobile + desktop)
 
 
 
-## 📂 Project Structure
-src/
-└── main/
-├── java/
-└── resources/
+🛠 Tech Stack
+Java 8
+Spring Boot
+Spring MVC
+Hibernate / JPA
+MySQL (Database)
+Thymeleaf (Template Engine)
+HTML5, CSS3, JavaScript
+Maven
 
 
----
+📂 Project Structure
+src/└── main/   
+├── java/    
+│   └── com.parking.system    
+│       ├── controller    
+│       ├── service    
+│       ├── model    
+│       ├── repository    
+│       └── config    
+│    └── resources/        
+├── templates/   # HTML Pages (Entry, Exit, Dashboard)        
+├── static/      # CSS, Images        
+└── application.properties
 
-## 🚀 How to Run
-1. Clone the repository
-2. Open in IntelliJ / Eclipse
-3. Run the main class:
-   `ParkingManagementApplication.java`
 
----
 
-## 📅 Daily Progress Log
+🚀 How to Run the Project
+git clone https://github.com/your-username/smart-parking-system.git
+Import project into IntelliJ / Eclipse
+Configure MySQL database
+Update application.properties
 
-### Day 1
-- Project initialized
+Run:
+SmartParkingApplication.java
 
-  
+Open in browser:
+http://localhost:8080
 
-## 🔮 Upcoming Features
-- Vehicle Entry System
-- Vehicle Exit System
-- Parking Slot Management
-- Database Integration
-- REST APIs
 
----
+🌐 Live Project
+🚧 Coming soon
 
-## 👩‍💻 Author
+👩‍💻 Author
 Aishwarya Pandey
