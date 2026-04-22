@@ -3,12 +3,15 @@ The Smart Parking Management System is a full-stack web application built using 
 It simulates a real-world automated parking system that handles:
 
 🚗 Vehicle Entry (Ticket Generation)
+
 🚙 Vehicle Exit (Billing System)
+
 🅿️ Real-time Slot Management Dashboard
 
 
 The system is designed to demonstrate backend architecture, database handling, and UI integration in a real-time project environment.
 🎯 Key Features
+
 ✔️ Vehicle entry with automatic ticket generation
 ✔️ Vehicle exit with dynamic billing system
 ✔️ Real-time parking slot tracking
