@@ -331,6 +331,8 @@
   </div>
 
   <div class="nav-buttons">
+
+    <a href="/history"><button>View History</button></a>
     <a href="/"><button>Home</button></a>
     <button onclick="toggleTheme()">🌗</button>
   </div>
@@ -368,7 +370,25 @@
          th:classappend="${slot.status=='FREE'}?'free':'occupied'">
 
       <h4 th:text="${slot.slotNumber}"></h4>
-      <p th:text="${slot.status}"></p>
+
+      <!-- FREE SLOT -->
+      <div th:if="${slot.status == 'FREE'}">
+        <p>🟢 FREE</p>
+      </div>
+
+      <!-- OCCUPIED SLOT -->
+      <div th:if="${slot.status == 'OCCUPIED'}">
+
+        <p>🔴 OCCUPIED</p>
+
+        <p style="font-size:12px; margin-top:5px;"
+           th:if="${slotVehicleMap[slot.id] != null}">
+
+          🚗 <span th:text="${slotVehicleMap[slot.id]}"></span>
+
+        </p>
+
+      </div>
 
     </div>
   </div>
